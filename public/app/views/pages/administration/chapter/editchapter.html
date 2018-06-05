@@ -1,0 +1,58 @@
+<div class  "page-header" > 
+    <h1>Edit Chapter</h1>
+</div>
+
+<br>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link PrimaryInfoTab" ng-click="editChapter.PrimaryInfoPhase();" ng-class="PrimaryInfoTab" data-toggle="tab" href="#" role="presentation" aria-controls="PrimaryInfoTab">Primary Information</a>
+    <a class="nav-item nav-link AdditionalInfoTab" ng-click="editChapter.AdditionalInfoPhase();" ng-class="AdditionalInfoTab" data-toggle="tab" href="#" role="presentation" aria-controls="AdditionalInfoTab">Additional Information</a>
+  </div>
+</nav>
+
+
+<form name="editChapter.PrimaryInfoForm" ng-show="editChapter.phase1" ng-submit="editChapter.updatePrimaryInfo(newPrimaryInfo, editChapter.PrimaryInfoForm.$valid)" novalidate>
+    <div ng-class="{ 'has-success':(editChapter.PrimaryInfoForm.chaptername.$valid && !editChapter.PrimaryInfoForm.chaptername.$pristine), 'has-error':(!editChapter.PrimaryInfoForm.chaptername.$valid && !editChapter.PrimaryInfoForm.chaptername.$pristine) || (!PrimaryInfoForm.chaptername.$valid && PrimaryInfoForm.$submitted) }">
+        <label>Chapter Name:</label>
+        <input ng-disabled="editChapter.disabled" class="form-control" type="text" name="chaptername" placeholder="please enter chapter name" ng-model="newPrimaryInfo.chaptername" ng-pattern="/^[a-zA-Z\d\-_\s]+$/" required>
+        <p class="help-block" ng-show="(!editChapter.PrimaryInfoForm.chaptername.$pristine && PrimaryInfoForm.chaptername.$error.required) || (editChapter.PrimaryInfoForm.$submitted && editChapter.PrimaryInfoForm.chaptername.$error.required)">This field is required</p>
+        <ul ng-show="(!editChapter.PrimaryInfoForm.chaptername.$pristine && editChapter.PrimaryInfoForm.chaptername.$error.pattern)" class="help-block">
+            <li> Must not contain any special characters</li>
+        </ul>
+    </div>
+
+    <div ng-class="{ 'has-success':(editChapter.PrimaryInfoForm.website.$valid && !editChapter.PrimaryInfoForm.website.$pristine), 'has-error':(!editChapter.PrimaryInfoForm.website.$valid && !editChapter.PrimaryInfoForm.website.$pristine) || (!PrimaryInfoForm.website.$valid && PrimaryInfoForm.$submitted) }">
+        <label>Chapter Website:</label>
+        <input ng-disabled="editChapter.disabled" class="form-control" type="text" name="website" placeholder="please enter chapter website" ng-model="newPrimaryInfo.website" ng-pattern="/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/" required>
+        <p class="help-block" ng-show="(!editChapter.PrimaryInfoForm.website.$pristine && PrimaryInfoForm.website.$error.required) || (editChapter.PrimaryInfoForm.$submitted && editChapter.PrimaryInfoForm.website.$error.required)">This field is required</p>
+        <ul ng-show="(!editChapter.PrimaryInfoForm.website.$pristine && editChapter.PrimaryInfoForm.website.$error.pattern)" class="help-block">
+            <li> Please enter valid website format</li>
+        </ul>
+    </div>
+    <br>
+    <!-- Submit Button -->
+    <button ng-disabled="editChapter.disabled" class="btn btn-primary" type="submit">Update</button>
+</form>
+
+<form name="editChapter.AdditionalInfoForm" ng-show="editChapter.phase2" ng-submit="editChapter.updateAdditionalInfo(newAdditionalInfo, editChapter.AdditionalInfoForm.$valid)" novalidate>
+    <div>Placeholder</div>
+
+    <br>
+</form>
+
+<br>
+
+<!-- Custom Success Message -->
+<div class="row show-hide-message" ng-show="editChapter.successMsg">
+    <div class="alert alert-success">{{ editChapter.successMsg }}</div>
+</div>
+<!-- Custom Success Message -->
+
+<br>
+
+<!-- Custom Error Message -->
+<div class="row show-hide-message" ng-show="editChapter.errorMsg">
+    <div class="alert alert-danger">{{ editChapter.errorMsg }}</div>
+</div>
+<!-- Custom Error Message -->
